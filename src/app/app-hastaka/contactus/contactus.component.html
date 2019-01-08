@@ -1,0 +1,74 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row" >
+      <div class="col-md-8" >
+          <div class="card">
+            <div class="card-header card-header-info">
+              <h4 class="card-title">Mail Us</h4>
+              <p class="card-category" style="color:#008000">Please provide your details to contact with us</p>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row" >
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                      <input matInput placeholder="First Name" name="contactData.firstname" [(ngModel)]="contactData.firstname" type="text" maxlength="50">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">                    
+                    <mat-form-field>
+                      <input matInput placeholder="Last Name" name="contactData.lastname"  [(ngModel)]="contactData.lastname" type="text" maxlength="50">
+                    </mat-form-field>
+                  </div>      
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="Address" name="contactData.address" [(ngModel)]="contactData.address" maxlength="100">
+                    </mat-form-field>       
+                  </div>
+                  <div class="col-sm-6">
+                    <mat-form-field>
+                      <input matInput type="tel" placeholder="Contact No." name="contactData.contact" [(ngModel)]="contactData.contact"  maxlength="20">
+                    </mat-form-field>
+                  </div>                               
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input matInput placeholder="City" name="contactData.city" [(ngModel)]="contactData.city" type="text">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input matInput placeholder="Country" name="contactData.country" [(ngModel)]="contactData.country" type="text">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input matInput placeholder="Postal Code" name="contactData.postalcode" [(ngModel)]="contactData.postalcode" type="text">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <mat-form-field>
+                        <input matInput type="email" placeholder="Email" name="contactData.email" [(ngModel)]="contactData.email" maxlength="50">
+                      </mat-form-field>       
+                    </div>
+                    <div class="col-sm-6">
+                      <mat-form-field>
+                        <input matInput type="text" placeholder="Remarks" name="contactData.remarks" [(ngModel)]="contactData.remarks" maxlength="500">
+                      </mat-form-field>
+                    </div>                               
+                  </div>
+                  <button mat-raised-button type="submit" (click)="submitData()"  class="btn btn-danger pull-right">Submit</button>
+                  <div class="clearfix"></div>                    
+                </form>                
+            </div>
+          </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
