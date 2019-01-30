@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "material-dashboard-angular": {
+    "ang-hastaka": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -59,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "material-dashboard-angular:build"
+            "browserTarget": "ang-hastaka:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "material-dashboard-angular:build:production"
+              "browserTarget": "ang-hastaka:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "material-dashboard-angular:build"
+            "browserTarget": "ang-hastaka:build"
           }
         },
         "test": {
@@ -122,7 +122,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "material-dashboard-angular:serve"
+            "devServerTarget": "ang-hastaka:serve"
           }
         },
         "lint": {
@@ -137,7 +137,7 @@
       }
     }
   },
-  "defaultProject": "material-dashboard-angular",
+  "defaultProject": "ang-hastaka",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

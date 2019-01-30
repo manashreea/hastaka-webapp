@@ -8,7 +8,7 @@ declare var $ : any;
 export class ContactusService {
     
     //private filejson = require('../../assets/data/contactus.json');
-    private readonly _filewithpath : string = 'http://localhost:3000/contactus/' ;
+    private readonly _filewithpath : string = 'http://localhost:5001/contactus/' ;
     private contactsdata = [];
     constructor(private _http : Http){
         this.getdata();
