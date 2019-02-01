@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
+import {MatFormFieldModule,MatTooltipModule,MatButtonModule} from '@angular/material';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -41,11 +41,22 @@ import { ContactusService } from './service/contactus.service';
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    }),
+    MatFormFieldModule,
+    MatTooltipModule,
+    MatButtonModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    DashboardComponent,
+    IconsComponent,
+    MapsComponent,
+    NotificationsComponent,
+    TableListComponent,
+    TypographyComponent,
+    UpgradeComponent,
+    UserProfileComponent,
   ],
   providers: [ ContactclassService,ContactusService ],
   bootstrap: [AppComponent]

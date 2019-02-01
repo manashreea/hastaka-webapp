@@ -9,19 +9,9 @@ import { ContactclassService } from '../../service/contactclass.service';
 })
 export class ContactusComponent implements OnInit {
 
-  //private objContService : ContactusService;
-  //private objData : ContactclassService;
-  public _firstname : string;
-  private _lastname : string;
-  private _address : string;
-  private _contact : string;
-  private _country : string;
-  private _city : string;
-  private _email : string;
-  private _postalcode : string;
-  private _remarks : string;
-
-  constructor(private contactData : ContactclassService,private contactService : ContactusService) {
+  public contactData : ContactclassService;
+  constructor(private _contactData : ContactclassService,private contactService : ContactusService) {
+    this.contactData = _contactData
    }
 
   ngOnInit() {
