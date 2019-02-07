@@ -2,15 +2,17 @@ import { Http,Response,RequestOptions,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 declare var $ : any; 
 
 @Injectable()
 export class ContactusService {
     
     //private filejson = require('../../assets/data/contactus.json');
-    private readonly _filewithpath : string = 'http://localhost:5001/contactus/' ;
+    private readonly _filewithpath : string = environment.jsonapiURL;
     private contactsdata = [];
     constructor(private _http : Http){
+        console.log('environment.jsonapiURL >>>> ',environment.jsonapiURL)
         this.getdata();
     }    
 

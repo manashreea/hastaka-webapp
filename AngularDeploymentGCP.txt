@@ -1,0 +1,84 @@
+#Deployment to Google Cloud Platform - Using the gcloud SDK to deploy an application
+>> Deployment on Google App Engine
+1. Build angular app from your repository code.
+    ng build --prod
+    This will create dist folder in your project directory.
+2. Create config file - app.yaml , This will be to deploy on Google App Engine
+    runtime: python27
+    api_version: 1
+    threadsafe: true
+
+    handlers:
+
+    - url: /
+     static_files: dist/index.html
+     upload: dist/index.html
+    - url: /
+     static_dir: dist
+
+3. Create bucket in Google Cloud Console to upload production build and deploy it. 
+4. Upload project production folder [dist] and  file [app.yaml] into bucket.
+5. Now open Google Interactive Shell and create on folder to sync data from bucket to that folder. 
+    gsutil rsync -r gs://gcloudbucketname ./[destinationfolder]
+6. Go to destinationfolder and deploy by using below command
+    gcloud app deploy
+7. After successfully deployment go to browser link to run.
+   e.g. https://angular-app.appspot.com
+8. To check gcloud app versions , below command
+    gcloud app versions list
+    gcloud app versions start
+    gcloud app versions stop
+
+>> Deployment on Google Compute Engine on PM2 and Ngnix    
+1. Go to google SSH client command
+2. Install Nodejs and Npm to run our project dependency 
+    $ sudo apt-get -y update
+    $ sudo apt-get install -y nodejs npm
+    $ sudo ln -s /usr/bin/nodejs /usr/bin/node
+3. Clone from git and setup our project
+    $ git clone https://github.com/manashreea/hastaka-webapp.git
+    $ cd hastaka-webapp
+    $ npm install
+    $ sudo npm install -g gulp    
+4. Configure Nginx. Nginx will serve as our reverse proxy. This allows our node application to be accessed from port 80
+    $ sudo apt-get install -y nginx
+
+    we can test that it installed correctly by doing
+    $ curl localhost
+    
+5. Navigate to Nginx’s sites-available folder. This folder contains configurations for nginx and will be where we create our new configuration.
+
+    $ cd /etc/nginx/sites-available
+    Optional: Backup your current default file
+
+    $ sudo mv default default.bak
+    Create our new default file:
+
+    $ sudo touch default
+
+    replace below code to file and save
+    ---------------------------
+    server {
+    listen 80;
+    server_name YOUR_SERVERS_IP_ADDRESS;
+
+    location / {
+        proxy_pass "http://127.0.0.1:8080";
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_cache_bypass $http_upgrade;
+    }
+    }
+
+    Restart nginx
+    sudo service nginx restart
+
+6. Install PM2
+    $ sudo npm install -g pm2
+    
+7. Navigate to our project - hastaka-webapp and start process by below command
+    $ sudo pm2 start "/usr/lib/node_modules/npm" --name "hastaka-webapp" -- start
+    $ sudo pm2 save
+
+8. Navigate to url of application deployed.
