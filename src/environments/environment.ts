@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  jsonapiURL : "http://35.245.70.23:5001/contactus/",
+  jsonapiURL : "http://35.245.70.23:5001/API",
 };

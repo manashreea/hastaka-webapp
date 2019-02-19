@@ -27,11 +27,16 @@ export class ContactusService {
     }
 
     getdata() {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json'});
+        headers.append("Access-Control-Allow-Origin",'true');
+        headers.append("Access-Control-Allow-Headers", "Access-Control-*,Cache-Control, username,userpassword,Pragma, Origin, Authorization,X-PINGOTHER, Content-Type, X-Requested-With,X-XSRF-TOKEN, query");
         let options = new RequestOptions({ headers: headers });
-        return this._http.get(this._filewithpath,options)
+        let APIUrl = this._filewithpath + "/getContactUsDetails";
+        return this._http.get(APIUrl,options)
         .map((res : Response)=> res.json())
-        .subscribe(data => { this.contactsdata = data; } , err => console.log(err));        
+        .subscribe(result => { 
+            console.log(result,'--result---result---result');
+            this.contactsdata = result.data; } , err => console.log(err));        
 
         // .subscribe(
         //     // the first argument is a function which runs on success
@@ -44,14 +49,17 @@ export class ContactusService {
     }
 
     updatedata(objData) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        let body = JSON.stringify(objData);
-        //console.log(body,'---body---body---body---',this._filewithpath);
-        return this._http.post(this._filewithpath,body,options)
+        let headers = new Headers({ 'Content-Type': 'application/json'});
+        var data = JSON.stringify(objData);
+        let options = new RequestOptions({ headers: headers});
+
+        let APIUrl = this._filewithpath + "/saveContactUsDetails";
+        console.log(data,'---body---body---body---',APIUrl);
+        return this._http.post(APIUrl, data, options)
             .map((res:Response) => res.json())
             .subscribe(
                 data => {
+                    console.log(data,'res res res res');
                     this.getdata();
                     return true;
                 },
@@ -65,16 +73,28 @@ export class ContactusService {
     sumbitContactUs(varObj:any): void{
         let data = 
             {
-                "FirstName":varObj.firstname,
-                "LastName":varObj.lastname,
-                "Address":varObj.address,
-                "Contact":varObj.contact,
-                "Country":varObj.country,
-                "City":varObj.city,
-                "PostalCode":varObj.postalcode,
-                "Email":varObj.email,
-                "Remarks":varObj.remarks
-            };        
+                "firstname":varObj.firstname,
+                "lastname":varObj.lastname,
+                "address":varObj.address,
+                "contact":varObj.contact,
+                "country":varObj.country,
+                "city":varObj.city,
+                "postalcode":varObj.postalcode,
+                "email":varObj.email,
+                "remarks":varObj.remarks
+            };  
+            
+            // {
+            //     "FirstName":"Manashree",
+            //     "LastName":"Agashe",
+            //     "Address":"Thane",
+            //     "Contact":"89568989",
+            //     "Country":"India",
+            //     "City":"Thane",
+            //     "PostalCode":"345346",
+            //     "Email":"sgsgssese",
+            //     "Remarks":"vbmnvbmvbmvbmvb"
+            // };              
 
         console.log(this.contactsdata,"Data passed to service >> ", data);
         this.updatedata(data);
