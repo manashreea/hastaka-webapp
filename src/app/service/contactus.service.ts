@@ -1,4 +1,4 @@
-import { Http,Response,RequestOptions,Headers } from '@angular/http';
+import { Http,Response,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
@@ -28,11 +28,8 @@ export class ContactusService {
 
     getdata() {
         let headers = new Headers({ 'Content-Type': 'application/json'});
-        headers.append("Access-Control-Allow-Origin",'true');
-        headers.append("Access-Control-Allow-Headers", "Access-Control-*,Cache-Control, username,userpassword,Pragma, Origin, Authorization,X-PINGOTHER, Content-Type, X-Requested-With,X-XSRF-TOKEN, query");
-        let options = new RequestOptions({ headers: headers });
         let APIUrl = this._filewithpath + "/getContactUsDetails";
-        return this._http.get(APIUrl,options)
+        return this._http.get(APIUrl,{headers:headers})
         .map((res : Response)=> res.json())
         .subscribe(result => { 
             console.log(result,'--result---result---result');
@@ -51,11 +48,9 @@ export class ContactusService {
     updatedata(objData) {
         let headers = new Headers({ 'Content-Type': 'application/json'});
         var data = JSON.stringify(objData);
-        let options = new RequestOptions({ headers: headers});
-
         let APIUrl = this._filewithpath + "/saveContactUsDetails";
         console.log(data,'---body---body---body---',APIUrl);
-        return this._http.post(APIUrl, data, options)
+        return this._http.post(APIUrl, data, {headers:headers})
             .map((res:Response) => res.json())
             .subscribe(
                 data => {
